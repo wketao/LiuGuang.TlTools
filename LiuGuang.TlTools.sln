@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiuGuang.Common", "Liuguang.Common\LiuGuang.Common.csproj", "{0E60A744-5194-4FC5-877F-7497D6FDD212}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiuGuang.UnAxp", "LiuGuang.UnAxp\LiuGuang.UnAxp.csproj", "{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E60A744-5194-4FC5-877F-7497D6FDD212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E60A744-5194-4FC5-877F-7497D6FDD212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E60A744-5194-4FC5-877F-7497D6FDD212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E60A744-5194-4FC5-877F-7497D6FDD212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {501A909D-22D8-493F-BD91-8637D1A75075}
+	EndGlobalSection
+EndGlobal
