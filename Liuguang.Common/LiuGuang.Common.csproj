@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppCommand.cs" />
+    <Compile Include="axp\FileBlockNode.cs" />
+    <Compile Include="axp\FileHashNode.cs" />
     <Compile Include="axp\FileHead.cs" />
     <Compile Include="axp\PackFile.cs" />
     <Compile Include="BindDataBase.cs" />
