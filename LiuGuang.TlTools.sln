@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiuGuang.Common", "Liuguang
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiuGuang.UnAxp", "LiuGuang.UnAxp\LiuGuang.UnAxp.csproj", "{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiuGuang.AssetChecker", "LiuGuang.AssetChecker\LiuGuang.AssetChecker.csproj", "{D2F42CD3-3AA9-4963-AA5C-57A766FC0AE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFD3A3C7-ACAA-40FD-A8CF-A9C599E000C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2F42CD3-3AA9-4963-AA5C-57A766FC0AE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F42CD3-3AA9-4963-AA5C-57A766FC0AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F42CD3-3AA9-4963-AA5C-57A766FC0AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F42CD3-3AA9-4963-AA5C-57A766FC0AE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,49 @@
+﻿<Window x:Class="LiuGuang.AssetChecker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LiuGuang.AssetChecker" xmlns:vm="clr-namespace:LiuGuang.AssetChecker.ViewModels"
+        mc:Ignorable="d"
+        Title="资源文件检查"  Height="368" Width="568" 
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="5,25"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0,25"/>
+                <Setter Property="FontSize" Value="24"/>
+            </Style>
+        </Grid.Resources>
+        <Label Grid.Row="0" Grid.Column="0">客户端目录</Label>
+        <TextBox  Grid.Row="0" Grid.Column="1" Text="{Binding ClientPath,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanSelectFile}"/>
+        <Button  Grid.Row="0" Grid.Column="2" Click="SelectClientPath"  IsEnabled="{Binding CanSelectFile}">选择</Button>
+
+        <Label Grid.Row="1" Grid.Column="0">明文目录</Label>
+        <TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding SourcePath,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanSelectFile}"/>
+        <Button  Grid.Row="1" Grid.Column="2" Click="SelectSourcePath" IsEnabled="{Binding CanSelectFile}">选择</Button>
+
+        <ProgressBar Grid.Row="2" Grid.Column="1"  Margin="5,25" Minimum="0" Maximum="{Binding TotalFileCount}" Value="{Binding ProcessCount}" />
+        <Button  Grid.Row="2" Grid.Column="2" Command="{Binding CheckCommand}">开始检测</Button>
+    </Grid>
+</Window>

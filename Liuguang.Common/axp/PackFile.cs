@@ -91,7 +91,7 @@ namespace LiuGuang.Common.axp
 
             var baseName = Path.GetFileNameWithoutExtension(axpFilePath);
             callback.Invoke(0, 100);
-            using (var fileStream = new FileStream(axpFilePath, FileMode.Open, FileAccess.Read))
+            using (var fileStream = new FileStream(axpFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 //加载文件信息
                 await LoadAsync(fileStream);
@@ -123,6 +123,46 @@ namespace LiuGuang.Common.axp
                 await fileStream.ReadAsync(fileData, 0, fileData.Length);
                 await outStream.WriteAsync(fileData, 0, fileData.Length);
             }
+        }
+
+        /// <summary>
+        /// 读取文本文件
+        /// </summary>
+        /// <param name="fileStream"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public async Task<string> ReadTextFile(FileStream fileStream, string filePath)
+        {
+            foreach (var fileInfo in FileList)
+            {
+                if (fileInfo.FilePath != filePath)
+                {
+                    continue;
+                }
+                var fileBlockNode = BlockTable.ItemList[fileInfo.BlockTablePos];
+                fileStream.Seek(fileBlockNode.DataOffset, SeekOrigin.Begin);
+                var fileData = new byte[fileBlockNode.BlockSize];
+                await fileStream.ReadAsync(fileData, 0, fileData.Length);
+                return HashTools.StrEncoding.GetString(fileData);
+            }
+            throw new Exception("未找到文件" + filePath);
+        }
+
+        /// <summary>
+        /// 判断某个文件是否在包里
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public bool FileExists(string filePath)
+        {
+            foreach (var fileInfo in FileList)
+            {
+                if (fileInfo.FilePath == filePath)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

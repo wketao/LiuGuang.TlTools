@@ -126,6 +126,7 @@ namespace LiuGuang.UnAxp.ViewModels
             }
             catch (Exception ex)
             {
+                ProcessCount = 0;
                 MessageBox.Show(ex.Message + "\n" + ex.StackTrace, "出错了", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             RunningTask = false;
