@@ -9,99 +9,111 @@ namespace LiuGuang.Common.axp
         /// <summary>
         /// AXPK 标记位
         /// </summary>
-        const uint AXPK_FILE_FLAG = 0x4158504b;
+        const uint AXPK_FILE_FLAG = 0x4b505841;
 
+
+        #region Fields
+        private byte[] binaryData = new byte[10 * 4];
+        #endregion
+
+        #region Properties
         /// <summary>
         /// 标记位
         /// </summary>
-        public uint Identity;
+        public uint Identity
+        {
+            get => ConvertUtils.GetUint(binaryData, 0);
+            set => ConvertUtils.SetUint(binaryData, 0, value);
+        }
 
         /// <summary>
         /// 版本(Major|Minor)
         /// </summary>
-        public uint Version;
+        public uint Version
+        {
+            get => ConvertUtils.GetUint(binaryData, 4);
+            set => ConvertUtils.SetUint(binaryData, 4, value);
+        }
 
         /// <summary>
         /// 编辑标志,当这个整数为1时，表示该文件正在被编辑
         /// </summary>
-        public uint EditFlag;
+        public uint EditFlag
+        {
+            get => ConvertUtils.GetUint(binaryData, 8);
+            set => ConvertUtils.SetUint(binaryData, 8, value);
+        }
 
         /// <summary>
         /// Hash表在文件中的偏移
         /// </summary>
-        public uint HashTableOffset;
+        public uint HashTableOffset
+        {
+            get => ConvertUtils.GetUint(binaryData, 12);
+            set => ConvertUtils.SetUint(binaryData, 12, value);
+        }
 
         /// <summary>
         /// Block表在文件中的偏移
         /// </summary>
-        public uint BlockTableOffset;
+        public uint BlockTableOffset
+        {
+            get => ConvertUtils.GetUint(binaryData, 16);
+            set => ConvertUtils.SetUint(binaryData, 16, value);
+        }
 
         /// <summary>
         /// Block表内容的个数
         /// </summary>
-        public uint BlockTableCount;
+        public uint BlockTableCount
+        {
+            get => ConvertUtils.GetUint(binaryData, 20);
+            set => ConvertUtils.SetUint(binaryData, 20, value);
+        }
 
         /// <summary>
         /// Block表最大容量大小(bytes)
         /// </summary>
-        public uint BlockTableMaxSize;
+        public uint BlockTableMaxSize
+        {
+            get => ConvertUtils.GetUint(binaryData, 24);
+            set => ConvertUtils.SetUint(binaryData, 24, value);
+        }
 
         /// <summary>
         /// 数据块在文件中的偏移
         /// </summary>
-        public uint DataOffset;
+        public uint DataOffset
+        {
+            get => ConvertUtils.GetUint(binaryData, 28);
+            set => ConvertUtils.SetUint(binaryData, 28, value);
+        }
 
         /// <summary>
         /// 数据块的大小,包括空洞(bytes)
         /// </summary>
-        public uint DataSize;
+        public uint DataSize
+        {
+            get => ConvertUtils.GetUint(binaryData, 32);
+            set => ConvertUtils.SetUint(binaryData, 32, value);
+        }
 
         /// <summary>
         /// 其中空洞数据块的大小(bytes)
         /// </summary>
-        public uint DataHoleSize;
+        public uint DataHoleSize
+        {
+            get => ConvertUtils.GetUint(binaryData, 36);
+            set => ConvertUtils.SetUint(binaryData, 36, value);
+        }
+        #endregion
 
         public async Task LoadAsync(FileStream fileStream)
         {
-            var buff = new byte[4];
-            //
-            Identity = await IoUtils.ReadUintAsync(fileStream, buff, IoUtils.EndianType.BigEndian);
-            Version = await IoUtils.ReadUintAsync(fileStream, buff);
-            EditFlag = await IoUtils.ReadUintAsync(fileStream, buff);
-            //
-            HashTableOffset = await IoUtils.ReadUintAsync(fileStream, buff);
-            BlockTableOffset = await IoUtils.ReadUintAsync(fileStream, buff);
-            BlockTableCount = await IoUtils.ReadUintAsync(fileStream, buff);
-            //
-            BlockTableMaxSize = await IoUtils.ReadUintAsync(fileStream, buff);
-            DataOffset = await IoUtils.ReadUintAsync(fileStream, buff);
-            DataSize = await IoUtils.ReadUintAsync(fileStream, buff);
-            DataHoleSize = await IoUtils.ReadUintAsync(fileStream, buff);
+            await fileStream.ReadAsync(binaryData, 0, binaryData.Length);
             if (Identity != AXPK_FILE_FLAG)
             {
                 throw new Exception("无效的AXP文件");
-            }
-        }
-
-        /// <summary>
-        /// 小端模式
-        /// </summary>
-        private void SetLittleEndian(byte[] buff)
-        {
-            if (!BitConverter.IsLittleEndian)
-            {
-                Array.Reverse(buff);
-            }
-        }
-
-        /// <summary>
-        /// 大端模式
-        /// </summary>
-        private void SetBigEndian(byte[] buff)
-        {
-            if (BitConverter.IsLittleEndian)
-            {
-                Array.Reverse(buff);
             }
         }
     }

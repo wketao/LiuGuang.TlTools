@@ -37,7 +37,6 @@ namespace LiuGuang.UnAxp
             {
                 dialog.InitialDirectory = initialDirectory;
             }
-            dialog.InitialDirectory = "aa";
             bool? result = dialog.ShowDialog();
             if (result == true)
             {

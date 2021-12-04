@@ -12,6 +12,8 @@ namespace LiuGuang.UnAxp.ViewModels
         private string axpFilePath = string.Empty;
         private string outputPath = string.Empty;
         private bool runningTask = false;
+        private int processCount = 0;
+        private int totalFileCount = 100;
         #endregion
 
         #region Properties
@@ -58,9 +60,20 @@ namespace LiuGuang.UnAxp.ViewModels
         }
 
         /// <summary>
-        /// 解压命令
+        /// 解包命令
         /// </summary>
         public AppCommand UnPackCommand { get; }
+
+        public int ProcessCount
+        {
+            get => processCount;
+            set => SetProperty(ref processCount, value);
+        }
+        public int TotalFileCount
+        {
+            get => totalFileCount;
+            set => SetProperty(ref totalFileCount, value);
+        }
         #endregion
 
         public MainWindowViewModel()
@@ -70,7 +83,7 @@ namespace LiuGuang.UnAxp.ViewModels
         }
 
         /// <summary>
-        /// 是否可以执行解压
+        /// 是否可以执行解包
         /// </summary>
         /// <returns></returns>
         public bool CanUnpack()
@@ -91,7 +104,7 @@ namespace LiuGuang.UnAxp.ViewModels
         }
 
         /// <summary>
-        /// 处理解压文件
+        /// 处理解包
         /// </summary>
         private async void DoUnpackAsync()
         {
@@ -102,9 +115,14 @@ namespace LiuGuang.UnAxp.ViewModels
                 await Task.Run(async () =>
                 {
                     var packFile = new PackFile();
-                    await packFile.LoadAsync(axpFilePath);
-                    Console.WriteLine("{0:x}", packFile.Head.Identity);
+                    await packFile.UnPackAsync(axpFilePath, OutputPath, (processCount, totalCount) =>
+                    {
+                        ProcessCount = processCount;
+                        TotalFileCount = totalCount;
+                    });
                 });
+                ProcessCount = 0;
+                MessageBox.Show("文件解包成功", "操作成功", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

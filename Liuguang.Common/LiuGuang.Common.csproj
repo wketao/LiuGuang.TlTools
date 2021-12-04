@@ -42,10 +42,14 @@
     <Compile Include="AppCommand.cs" />
     <Compile Include="axp\FileBlockNode.cs" />
     <Compile Include="axp\FileHashNode.cs" />
+    <Compile Include="axp\FileBlockTable.cs" />
+    <Compile Include="axp\FileHashTable.cs" />
     <Compile Include="axp\FileHead.cs" />
+    <Compile Include="axp\FileInfoNode.cs" />
+    <Compile Include="axp\HashTools.cs" />
     <Compile Include="axp\PackFile.cs" />
     <Compile Include="BindDataBase.cs" />
-    <Compile Include="IoUtils.cs" />
+    <Compile Include="ConvertUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

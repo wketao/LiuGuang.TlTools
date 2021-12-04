@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LiuGuang.UnAxp" xmlns:vm="clr-namespace:LiuGuang.UnAxp.ViewModels"
         mc:Ignorable="d"
-        Title="AXP解压工具" Height="368" Width="568" 
+        Title="AXP解包工具" Height="368" Width="568" 
         ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -39,11 +39,11 @@
         <TextBox  Grid.Row="0" Grid.Column="1" Text="{Binding AxpFilePath,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanSelectFile}"/>
         <Button  Grid.Row="0" Grid.Column="2" Click="SelectAxpFile"  IsEnabled="{Binding CanSelectFile}">选择</Button>
 
-        <Label Grid.Row="1" Grid.Column="0">解压目录</Label>
+        <Label Grid.Row="1" Grid.Column="0">解包目录</Label>
         <TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding OutputPath,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanSelectFile}"/>
         <Button  Grid.Row="1" Grid.Column="2" Click="SelectOutputPath" IsEnabled="{Binding CanSelectFile}">选择</Button>
 
-        <ProgressBar Grid.Row="2" Grid.Column="1"  Margin="5,25" Minimum="0" Maximum="100" Value="75" />
-        <Button  Grid.Row="2" Grid.Column="2" Command="{Binding UnPackCommand}">解压</Button>
+        <ProgressBar Grid.Row="2" Grid.Column="1"  Margin="5,25" Minimum="0" Maximum="{Binding TotalFileCount}" Value="{Binding ProcessCount}" />
+        <Button  Grid.Row="2" Grid.Column="2" Command="{Binding UnPackCommand}">解包</Button>
     </Grid>
 </Window>
