@@ -50,10 +50,10 @@
     <Compile Include="axp\PackFile.cs" />
     <Compile Include="BindDataBase.cs" />
     <Compile Include="ConvertUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
