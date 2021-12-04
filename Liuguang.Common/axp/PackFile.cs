@@ -109,7 +109,10 @@ namespace LiuGuang.Common.axp
             fileStream.Seek(fileBlockNode.DataOffset, SeekOrigin.Begin);
             using (var outStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
             {
-                await fileStream.CopyToAsync(outStream, (int)fileBlockNode.BlockSize);
+                //Console.WriteLine($"filename={outputFilePath}, size={fileBlockNode.BlockSize:x}");
+                var fileData=new byte[fileBlockNode.BlockSize];
+                await fileStream.ReadAsync(fileData, 0, fileData.Length);
+                await outStream.WriteAsync(fileData, 0, fileData.Length);
             }
         }
     }
