@@ -135,7 +135,7 @@ namespace LiuGuang.Common.axp
         {
             foreach (var fileInfo in FileList)
             {
-                if (fileInfo.FilePath != filePath)
+                if (!fileInfo.FilePath.Equals(filePath, StringComparison.InvariantCultureIgnoreCase))
                 {
                     continue;
                 }
@@ -157,7 +157,7 @@ namespace LiuGuang.Common.axp
         {
             foreach (var fileInfo in FileList)
             {
-                if (fileInfo.FilePath == filePath)
+                if (fileInfo.FilePath.Equals(filePath, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return true;
                 }
