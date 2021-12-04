@@ -47,14 +47,23 @@ namespace LiuGuang.Common.axp
             var listFileContent = HashTools.StrEncoding.GetString(fileData);
             using (var reader = new StringReader(listFileContent))
             {
-                //忽略第一行
-                await reader.ReadLineAsync();
-                var fileCountStr = await reader.ReadLineAsync();
-                var fileCount = int.Parse(fileCountStr);
-                for (var i = 0; i < fileCount; i++)
+                while (true)
                 {
-                    var fileInfoLine = await reader.ReadLineAsync();
-                    var filePath = fileInfoLine.Substring(0, fileInfoLine.IndexOf("|"));
+                    var lineContent = await reader.ReadLineAsync();
+                    //没有新行了
+                    if (lineContent == null)
+                    {
+                        break;
+                    }
+                    //格式不对,跳过这一行
+                    var pIndex = lineContent.IndexOf("|");
+                    if (pIndex <= 0)
+                    {
+                        continue;
+                    }
+                    //获取文件路径
+                    var filePath = lineContent.Substring(0, pIndex);
+                    //查找hash表
                     var normaliseName = filePath.Replace("\\", "/").ToLower();
                     var fileHashTablePos = HashTools.GetPosInHashTable(HashTable, normaliseName);
                     if (fileHashTablePos < 0)
@@ -110,7 +119,7 @@ namespace LiuGuang.Common.axp
             using (var outStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
             {
                 //Console.WriteLine($"filename={outputFilePath}, size={fileBlockNode.BlockSize:x}");
-                var fileData=new byte[fileBlockNode.BlockSize];
+                var fileData = new byte[fileBlockNode.BlockSize];
                 await fileStream.ReadAsync(fileData, 0, fileData.Length);
                 await outStream.WriteAsync(fileData, 0, fileData.Length);
             }
