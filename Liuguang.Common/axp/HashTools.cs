@@ -27,7 +27,7 @@ namespace LiuGuang.Common.axp
         /// </summary>
         public static uint[] MathDataBuf;
 
-        public static readonly Encoding StrEncoding = Encoding.Default;
+        public static readonly Encoding StrEncoding = Encoding.GetEncoding("GB18030");
         /// <summary>
         /// 初始化数据表
         /// </summary>
